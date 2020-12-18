@@ -37,12 +37,10 @@ public class TeacherView extends JFrame {
         this.teacher = teacher;
         Container cp = this.getContentPane();
         cp.setLayout(new BorderLayout());
-
         JButton jbtHome = new BarTool().getButton("首页", "src/img/home.png");
         JButton jbtArrangement = new BarTool().getButton("教学安排", "src/img/course.png");
         JButton jbtGradeinput = new BarTool().getButton("成绩录入", "src/img/Selectcourse.png");
         JButton jbtUser = new BarTool().getButton("用户管理", "src/img/user.png");
-
         JPanel bar = new JPanel();
         bar.add(jbtHome);
         bar.add(jbtArrangement);
@@ -83,7 +81,6 @@ public class TeacherView extends JFrame {
                 replacementPanel(mid, getUser());
             }
         });
-
     }
 
     /*首页面板*/
@@ -106,7 +103,7 @@ public class TeacherView extends JFrame {
         class TableViewRenderer extends JTextArea implements TableCellRenderer {
             public TableViewRenderer() {
                 //将表格设为自动换行
-                setLineWrap(true); //利用JTextArea的自动换行方法
+                setLineWrap(true);
                 setWrapStyleWord(true);
             }
 
