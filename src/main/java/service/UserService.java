@@ -1,6 +1,5 @@
 package service;
 
-import dao.UserDao;
 import dao.UserMapper;
 import entity.User;
 import org.apache.ibatis.session.SqlSession;

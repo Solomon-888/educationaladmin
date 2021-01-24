@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.StudentMapper">
+    <select id="getStudent" resultMap="studentMapper" parameterType="String">
+        SELECT student.s_id,student.s_name,student.s_sex,student.s_date,class.c_name
+        FROM student JOIN class ON student.c_id = class.c_id
+        WHERE s_id = #{id}
+    </select>
+    <resultMap id="studentMapper" type="student">
+        <result column="c_name" property="c_id"/>
+    </resultMap>
+
+    <select id="getYear" resultType="string">
+        SELECT DISTINCT cp_year FROM course_plan
+    </select>
+
+    <select id="getTeachingClassId" resultType="String" parameterType="map">
+        SELECT grade.tc_id FROM grade,teaching_plan
+        WHERE grade.tc_id = teaching_plan.tc_id
+        AND cp_year = #{cp_year}
+        AND S_id = #{s_id};
+    </select>
+
+    <select id="getTeachingclass" resultMap="TeachingClassMapper" parameterType="String">
+        SELECT teaching_plan.tc_id,tc_name,course_name,tc_time,tc_point,tc_num
+        FROM teaching_class,teaching_plan,course
+        WHERE teaching_class.tc_id = teaching_plan.tc_id
+        AND
+        teaching_plan.course_id = course.course_id
+        AND teaching_plan.tc_id = #{tc_id}
+    </select>
+
+    <resultMap id="TeachingClassMapper" type="TeachingClass">
+        <result column="tc_id" property="tc_id"/>
+        <result column="tc_name" property="tc_name"/>
+        <result column="course_name" property="c_name"/>
+        <result column="tc_time" property="tc_time"/>
+        <result column="tc_point" property="tc_point"/>
+        <result column="tc_num" property="tc_num"/>
+    </resultMap>
+
+    <select id="getSelectCourse" parameterType="String" resultMap="SelectCourseMapper">
+        SELECT *FROM yc WHERE cp_year = #{cp_year}
+    </select>
+
+    <resultMap id="SelectCourseMapper" type="SelectCourse">
+        <result property="teacherClass" column="tc_name"/>
+        <result property="credit" column="course_credit"/>
+        <result property="teacherName" column="t_name"/>
+        <result property="courseTime" column="tc_time"/>
+        <result property="coursePoint" column="tc_point"/>
+    </resultMap>
+
+    <select id="getGrade" resultMap="GradeMapper" parameterType="map">
+        SELECT *FROM student_grade_year WHERE s_id = #{id} AND cp_year = #{cpYear}
+    </select>
+    <resultMap id="GradeMapper" type="Grade">
+        <result column="s_id" property="s_id"/>
+        <result column="s_name" property="s_name"/>
+        <result column="course_name" property="course_name"/>
+        <result column="g_ordinary" property="g_ordinary"/>
+        <result column="g_final" property="g_final"/>
+        <result column="g_sum" property="g_sum"/>
+    </resultMap>
+
+</mapper>

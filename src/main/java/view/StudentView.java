@@ -10,7 +10,6 @@ import tool.BarTool;
 import tool.PublicTool;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,11 +35,11 @@ public class StudentView extends JFrame {
         Container cp = this.getContentPane();
         cp.setLayout(new BorderLayout());
 
-        JButton jbtHome = new BarTool().getButton("首页", "src/img/home.png");
-        JButton jbtCourse = new BarTool().getButton("课程查询", "src/img/course.png");
-        JButton jbtSelectcourse = new BarTool().getButton("选课系统", "src/img/Selectcourse.png");
-        JButton jbtGrade = new BarTool().getButton("成绩查询", "src/img/grade.png");
-        JButton jbtUser = new BarTool().getButton("用户管理", "src/img/user.png");
+        JButton jbtHome = new BarTool().getButton("首页", "img/home.png");
+        JButton jbtCourse = new BarTool().getButton("课程查询", "img/course.png");
+        JButton jbtSelectcourse = new BarTool().getButton("选课系统", "img/Selectcourse.png");
+        JButton jbtGrade = new BarTool().getButton("成绩查询", "img/grade.png");
+        JButton jbtUser = new BarTool().getButton("用户管理", "img/user.png");
 
         JPanel bar = new JPanel();
         bar.add(jbtHome);
@@ -266,6 +265,7 @@ public class StudentView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Object cp_year = comboBox.getSelectedItem();
                 List<SelectCourse> courses = new StudentService().getSelectcourse(student.getS_id(), (String) cp_year);
+                System.out.println(courses);
                 Object[][] tableDate = new Object[courses.size()][5];
                 for (int i = 0; i < courses.size(); i++) {
                     for (int j = 0; j < 5; j++) {
@@ -330,6 +330,7 @@ public class StudentView extends JFrame {
                         JOptionPane.showMessageDialog(jf, "请检查选择的课是否与已选的选课冲突！", "错误 ", JOptionPane.ERROR_MESSAGE);
                     } else {
                         boolean courseAdd = new StudentService().courseAdd(className, student.getS_id());
+                        System.out.println(courseAdd);
                         if (courseAdd)
                             JOptionPane.showMessageDialog(jf, "选课成功!", "提示", JOptionPane.PLAIN_MESSAGE);
                         else
@@ -444,7 +445,7 @@ public class StudentView extends JFrame {
         jtfSex.setText(student.getS_sex());
         JTextField jtfDate = new JTextField(10);
         jtfDate.setEditable(false);
-        jtfDate.setText(student.getS_date().toString());
+        jtfDate.setText(PublicTool.getDate(student.getS_date()));
         JTextField jtfClass = new JTextField(10);
         jtfClass.setEditable(false);
         jtfClass.setText(student.getC_id());
@@ -480,7 +481,6 @@ public class StudentView extends JFrame {
                 int option = JOptionPane.showConfirmDialog(jf, message, "修改密码", JOptionPane.YES_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     String oldPassword = new StudentService().getOldpassword(student.getS_id());
-                    System.out.println();
                     if (!oldPassword.equals(PublicTool.transitionPassword(jpOldPassword.getPassword()))) {
                         JOptionPane.showMessageDialog(jf, "原密码输入错误", "错误 ", 0);
                     } else if (!PublicTool.transitionPassword(jpPassword.getPassword()).equals(PublicTool.transitionPassword(jpRepassword.getPassword()))) {

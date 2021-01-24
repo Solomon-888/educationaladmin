@@ -6,6 +6,8 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class PublicTool {
@@ -83,5 +85,9 @@ public class PublicTool {
             bWriter.newLine();
         }
         bWriter.close();
+    }
+    public static String getDate(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(date);
     }
 }

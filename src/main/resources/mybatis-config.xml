@@ -30,6 +30,7 @@
 
     <mappers>
         <mapper class="dao.UserMapper"/>
+        <mapper class="dao.StudentMapper"/>
     </mappers>
 
 </configuration>
