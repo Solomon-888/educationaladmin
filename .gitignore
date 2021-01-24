@@ -4,5 +4,5 @@ out
 *.class
 *.jar
 *.war
-JDBC.properties
+db.properties
 META-INF

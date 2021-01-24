@@ -60,7 +60,6 @@ public class LoginView extends JFrame {
                 User user = new User(uId, uPassword, null);
                 UserService userService = new UserService();
                 if (userService.judgementIDandPassword(user)) {
-                    userService.getStatus(user);
                     if (user.getuStatus().equals("教师")) {
                         jf.dispose();
                         TeacherView teacherView = new TeacherView(new TeacherService().getTeacher(uId));
