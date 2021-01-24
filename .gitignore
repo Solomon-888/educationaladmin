@@ -1,8 +1,10 @@
 .idea
 *.iml
 out
+target
 *.class
 *.jar
 *.war
-db.properties
+dependency-reduced-pom.xml
+src/main/resources/db.properties
 META-INF

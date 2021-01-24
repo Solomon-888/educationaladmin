@@ -6,18 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class BarTool extends JFrame {
     //设置导航栏的按钮
     public JButton getButton (String text,String img){
-        String absolutePath = null;
-        try {
-            File resourceAsFile = Resources.getResourceAsFile(img);
-            absolutePath = resourceAsFile.getAbsolutePath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ImageIcon imageIcon = new ImageIcon(absolutePath);
+        ImageIcon imageIcon = new ImageIcon(this.getClass().getClassLoader().getResource(img));
         imageIcon.setImage(imageIcon.getImage().getScaledInstance(28,28, Image.SCALE_DEFAULT));
         Font font = new Font("行书",Font.LAYOUT_LEFT_TO_RIGHT,16);
         JButton jbt1 = new JButton(text,imageIcon);

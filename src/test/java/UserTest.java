@@ -1,3 +1,4 @@
+/*
 import dao.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -12,3 +13,4 @@ public class UserTest {
         sqlSession.close();
     }
 }
+*/
