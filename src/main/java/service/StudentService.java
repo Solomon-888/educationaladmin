@@ -90,10 +90,14 @@ public class StudentService {
         map.put("s_id", id);
         map.put("cp_year", year);
         List<String> teachingClassId = mapper.getTeachingClassId(map);
-        List<TeachingClass> teachingClassList = new ArrayList<>();
+        if (teachingClassId.size() == 0)
+            return new ArrayList<>();
+        /*List<TeachingClass> teachingClassList = new ArrayList<>();
         for (String tci : teachingClassId) {
             teachingClassList.add(mapper.getTeachingclass(tci));
-        }
+        }*/
+        map.put("teachingClassIdList",teachingClassId);
+        List<TeachingClass> teachingClassList = mapper.getTeachingclass2(map);
         sqlSession.close();
         return teachingClassList;
     }

@@ -11,7 +11,7 @@ import java.net.URL;
 public class BarTool extends JFrame {
     //设置导航栏的按钮
     public JButton getButton (String text,String img){
-        ImageIcon imageIcon = new ImageIcon(this.getClass().getClassLoader().getResource(img));
+        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource(img));
         imageIcon.setImage(imageIcon.getImage().getScaledInstance(28,28, Image.SCALE_DEFAULT));
         Font font = new Font("行书",Font.LAYOUT_LEFT_TO_RIGHT,16);
         JButton jbt1 = new JButton(text,imageIcon);

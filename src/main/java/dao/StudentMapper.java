@@ -15,10 +15,16 @@ import java.util.Map;
 
 public interface StudentMapper {
     Student getStudent(String id);
+
     List<String> getYear();
+
     List<String> getTeachingClassId(Map<String,Object> map);
+
     TeachingClass getTeachingclass(String tc_id);
+
     List<SelectCourse> getSelectCourse(String cp_year);
+
+    List<TeachingClass> getTeachingclass2(Map map);
 
     @Select("SELECT tc_id FROM teaching_class WHERE tc_name = #{tc_name}")
     String getTeachingclassIdbyName(@Param("tc_name") String tc_name);

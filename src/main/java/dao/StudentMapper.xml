@@ -45,6 +45,21 @@
         SELECT *FROM yc WHERE cp_year = #{cp_year}
     </select>
 
+    <select id="getTeachingclass2" parameterType="map" resultMap="TeachingClassMapper">
+        SELECT teaching_plan.tc_id,tc_name,course_name,tc_time,tc_point,tc_num
+        FROM teaching_class,teaching_plan,course
+        WHERE teaching_class.tc_id = teaching_plan.tc_id
+        AND
+        teaching_plan.course_id = course.course_id
+        AND
+
+            <foreach collection="teachingClassIdList" item="teachingClassId" open="(" close=")" separator="or">
+                teaching_plan.tc_id = #{teachingClassId}
+            </foreach>
+
+    </select>
+
+
     <resultMap id="SelectCourseMapper" type="SelectCourse">
         <result property="teacherClass" column="tc_name"/>
         <result property="credit" column="course_credit"/>
