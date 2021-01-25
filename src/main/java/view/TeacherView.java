@@ -37,10 +37,10 @@ public class TeacherView extends JFrame {
         this.teacher = teacher;
         Container cp = this.getContentPane();
         cp.setLayout(new BorderLayout());
-        JButton jbtHome = new BarTool().getButton("首页", "src/img/home.png");
-        JButton jbtArrangement = new BarTool().getButton("教学安排", "src/img/course.png");
-        JButton jbtGradeinput = new BarTool().getButton("成绩录入", "src/img/Selectcourse.png");
-        JButton jbtUser = new BarTool().getButton("用户管理", "src/img/user.png");
+        JButton jbtHome = new BarTool().getButton("首页", "img/home.png");
+        JButton jbtArrangement = new BarTool().getButton("教学安排", "img/course.png");
+        JButton jbtGradeinput = new BarTool().getButton("成绩录入", "img/Selectcourse.png");
+        JButton jbtUser = new BarTool().getButton("用户管理", "img/user.png");
         JPanel bar = new JPanel();
         bar.add(jbtHome);
         bar.add(jbtArrangement);
@@ -92,7 +92,6 @@ public class TeacherView extends JFrame {
         textArea.setText(text);
         textArea.setFont(new Font("黑体", 1, 30));
         Home.add(textArea);
-
         return Home;
     }
 

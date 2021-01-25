@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TeacherMapper">
+    <select id="getTeacher" parameterType="String" resultMap="TeacherMapper">
+        SELECT *FROM teacher WHERE t_id = #{id}
+    </select>
+
+    <resultMap id="TeacherMapper" type="Teacher">
+        <result column="t_id" property="t_id"/>
+        <result column="t_name" property="t_name"/>
+        <result column="t_sex" property="t_sex"/>
+        <result column="t_date" property="t_date"/>
+    </resultMap>
+
+    <select id="getTeachingplan" resultMap="TeachingPlanMapper" parameterType="map">
+        SELECT t_id,tc_name,tc_time,tc_point,cp_year FROM teacher_teaching_class
+                JOIN teaching_class ON teacher_teaching_class.tc_id = teaching_class.tc_id
+                JOIN teaching_plan ON teacher_teaching_class.tc_id = teaching_plan.tc_id
+                WHERE teacher_teaching_class.t_id = #{t_id} AND cp_year = #{cp_year}
+    </select>
+
+    <resultMap id="TeachingPlanMapper" type="TeachingPlan">
+        <result column="tc_name" property="tc_name"/>
+        <result column="tc_time" property="tc_time"/>
+        <result column="tc_point" property="tc_point"/>
+    </resultMap>
+
+    <select id="getGradebyClass" resultMap="GradeMapper" parameterType="string">
+        SELECT student.s_id,student.s_name,g_ordinary,g_final,g_sum FROM grade JOIN student ON grade.s_id = student.s_id
+                JOIN teaching_class ON teaching_class.tc_id = grade.tc_id
+                WHERE tc_name = #{tc_name}
+    </select>
+
+    <resultMap id="GradeMapper" type="Grade">
+        <result column="s_id" property="s_id"/>
+        <result column="s_name" property="s_name"/>
+        <result column="g_ordinary" property="g_ordinary"/>
+        <result column="g_final" property="g_final"/>
+        <result column="g_sum" property="g_sum"/>
+    </resultMap>
+
+    <update id="updateGrade" parameterType="map">
+        UPDATE grade SET g_ordinary = #{ordinary},g_final = #{final},g_sum = #{sum}
+        WHERE tc_id = #{tcId} AND s_id = #{sId}
+    </update>
+
+
+</mapper>
